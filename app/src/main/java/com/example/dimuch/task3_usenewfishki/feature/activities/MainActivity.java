@@ -32,7 +32,7 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
   }
 
   @OnClick(R.id.bCamera) public void onClickCamera(Button button) {
-    //Intent intent = new Intent(this, CameraActivity.class);
-    //startActivity(intent);
+    Intent intent = new Intent(this, CameraActivity.class);
+    startActivity(intent);
   }
 }
