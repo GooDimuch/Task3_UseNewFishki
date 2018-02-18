@@ -1,14 +1,17 @@
 package com.example.dimuch.task3_usenewfishki.feature.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -19,7 +22,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.dimuch.task3_usenewfishki.R;
 import com.example.dimuch.task3_usenewfishki.feature.views.ICameraActivityView;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,6 +44,15 @@ public class CameraActivity extends MvpAppCompatActivity implements ICameraActiv
     ButterKnife.bind(this);
 
     createDirectory();
+    checkPermission();
+  }
+
+  private void checkPermission() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 1);
+      }
+    }
   }
 
   @OnClick(R.id.bUsePhoto) public void onClickUsePhoto() {
@@ -52,16 +63,16 @@ public class CameraActivity extends MvpAppCompatActivity implements ICameraActiv
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-     if (resultCode == RESULT_OK) {
-       Timber.wtf(photo.getPath());
-       Picasso.with(getApplicationContext())
-           //.load(new File(directory.getPath() + "/" + "gd" + ".png"))
-           .load(photo)
-           .fit()
-           .centerCrop()
-           .placeholder(R.drawable.ic_launcher_background)
-           .error(R.drawable.gd_red)
-           .into(ivPhoto);
+    if (resultCode == RESULT_OK) {
+      Timber.wtf(photo.getPath());
+      Picasso.with(getApplicationContext())
+          //.load(new File(directory.getPath() + "/" + "gd" + ".png"))
+          .load(photo)
+          .fit()
+          .centerCrop()
+          .placeholder(R.drawable.ic_launcher_background)
+          .error(R.drawable.gd_red)
+          .into(ivPhoto);
     } else if (resultCode == RESULT_CANCELED) {
       Timber.wtf("Canceled");
     }
@@ -73,8 +84,8 @@ public class CameraActivity extends MvpAppCompatActivity implements ICameraActiv
   }
 
   private String getFileName() {
-    @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter
-        = new SimpleDateFormat ("yyyyMMddHHmmss");
+    @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter =
+        new SimpleDateFormat("yyyyMMddHHmmss");
     Date currentTime = Calendar.getInstance().getTime();
     return "photo_" + formatter.format(currentTime);
   }
