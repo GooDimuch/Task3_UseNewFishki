@@ -17,6 +17,7 @@ import timber.log.Timber;
 public class MainActivity extends MvpAppCompatActivity implements IMainActivityView {
 
   @BindView(R.id.bCamera) Button bCamera;
+  @BindView(R.id.bFirebase) Button bFirebase;
 
   @InjectPresenter MainActivityPresenter mainActivityPresenter;
 
@@ -33,6 +34,11 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
 
   @OnClick(R.id.bCamera) public void onClickCamera(Button button) {
     Intent intent = new Intent(this, CameraActivity.class);
+    startActivity(intent);
+  }
+
+  @OnClick(R.id.bFirebase) public void onClickFirebase(Button button) {
+    Intent intent = new Intent(this, FirebaseActivity.class);
     startActivity(intent);
   }
 }
