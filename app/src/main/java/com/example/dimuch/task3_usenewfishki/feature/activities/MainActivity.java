@@ -28,7 +28,7 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
   }
 
   @Override public void showToast(String sToastMessage) {
-    Timber.e("showToast");
+    Timber.wtf(sToastMessage);
     Toast.makeText(getApplicationContext(), sToastMessage, Toast.LENGTH_LONG).show();
   }
 

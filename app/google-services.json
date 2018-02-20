@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "756072916817",
+    "firebase_url": "https://task3usenewfishki.firebaseio.com",
+    "project_id": "task3usenewfishki",
+    "storage_bucket": "task3usenewfishki.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756072916817:android:bdaabfed510a685a",
+        "android_client_info": {
+          "package_name": "com.example.dimuch.task3_usenewfishki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756072916817-6ot2fpdq2af3tm44o3evilso9irrcoon.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dimuch.task3_usenewfishki",
+            "certificate_hash": "efc682821608139699e8dc953893eb69fc25818a"
+          }
+        },
+        {
+          "client_id": "756072916817-2h3c6le6ifq6lciv58v8a33bcsc1d4v7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOYb56FktzurmpqXybaeVX0nhxUY-ol50"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756072916817-2h3c6le6ifq6lciv58v8a33bcsc1d4v7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
