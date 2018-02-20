@@ -1,5 +1,6 @@
 package com.example.dimuch.task3_usenewfishki.feature.views;
 
+import android.net.Uri;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
@@ -11,4 +12,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 @StateStrategyType(AddToEndStrategy.class) public interface ICameraActivityView extends MvpView {
 
   void showToast(String sToastMessage);
+
+  void showPhoto(Uri uri);
 }
