@@ -19,7 +19,9 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
 
-    <activity android:name=".feature.activities.MainActivity">
+    <activity
+        android:name=".feature.activities.MainActivity"
+        android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -27,16 +29,20 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".feature.activities.CameraActivity"
+    <activity
+        android:name=".feature.activities.CameraActivity"
         android:parentActivityName=".feature.activities.MainActivity">
     </activity>
 
-    <activity android:name=".feature.activities.FirebaseActivity"
+    <activity
+        android:name=".feature.activities.FirebaseActivity"
         android:parentActivityName=".feature.activities.MainActivity">
     </activity>
 
-    <activity android:name=".feature.activities.CoordinatePlaneActivity"
-        android:parentActivityName=".feature.activities.MainActivity">
+    <activity
+        android:name=".feature.activities.CoordinatePlaneActivity"
+        android:parentActivityName=".feature.activities.MainActivity"
+        android:screenOrientation="landscape">
     </activity>
   </application>
 
