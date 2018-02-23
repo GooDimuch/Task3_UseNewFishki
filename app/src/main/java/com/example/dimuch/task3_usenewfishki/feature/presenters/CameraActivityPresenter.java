@@ -19,7 +19,6 @@ import javax.inject.Inject;
 
 @InjectViewState public class CameraActivityPresenter extends MvpPresenter<ICameraActivityView> {
 
-  @Inject String testMessage;
   //@Inject DataManager mDataManager;
 
   File directory;
@@ -35,7 +34,6 @@ import javax.inject.Inject;
     createDirectory();
     getViewState().showPhoto(
         Uri.fromFile(new File(directory.getPath() + "/" + "photo_20180218191918" + ".jpg")));
-    //getViewState().showToast(testMessage);
   }
 
   private void createDirectory() {

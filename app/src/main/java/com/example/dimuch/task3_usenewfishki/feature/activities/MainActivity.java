@@ -16,8 +16,9 @@ import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements IMainActivityView {
 
-  @BindView(R.id.bCamera) Button bCamera;
-  @BindView(R.id.bFirebase) Button bFirebase;
+  //@BindView(R.id.bCamera) Button bCamera;
+  //@BindView(R.id.bFirebase) Button bFirebase;
+  //@BindView(R.id.bCoordinatePlane) Button bCoordinatePlane;
 
   @InjectPresenter MainActivityPresenter mainActivityPresenter;
 
@@ -39,6 +40,11 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
 
   @OnClick(R.id.bFirebase) public void onClickFirebase(Button button) {
     Intent intent = new Intent(this, FirebaseActivity.class);
+    startActivity(intent);
+  }
+
+  @OnClick(R.id.bCoordinatePlane) public void onClickCoordinatePlane(Button button) {
+    Intent intent = new Intent(this, CoordinatePlaneActivity.class);
     startActivity(intent);
   }
 }
