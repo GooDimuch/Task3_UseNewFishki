@@ -1,5 +1,6 @@
 package com.example.dimuch.task3_usenewfishki.feature.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,11 @@ import com.example.dimuch.task3_usenewfishki.feature.adapters.ChatFirebaseAdapte
 import com.example.dimuch.task3_usenewfishki.feature.presenters.FirebaseActivityPresenter;
 import com.example.dimuch.task3_usenewfishki.feature.views.IFirebaseActivityView;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -113,14 +119,31 @@ public class FirebaseActivity extends MvpAppCompatActivity implements IFirebaseA
   }
 
   private void checkAuthorization() {
-    startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
-        SIGN_IN_REQUEST_CODE);
+    if (isGooglePlayServicesAvailable(this)) {
+      //Timber.wtf("isGooglePlayServicesAvailable = true");
+      startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
+          SIGN_IN_REQUEST_CODE);
+    } else {
+      Timber.wtf("isGooglePlayServicesAvailable = false");
+    }
     //if (FirebaseAuth.getInstance().getCurrentUser() == null) {
     //  startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
     //      SIGN_IN_REQUEST_CODE);
     //} else {
     //  displayChat();
     //}
+  }
+
+  public boolean isGooglePlayServicesAvailable(Activity activity) {
+    GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+    int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
+    if(status != ConnectionResult.SUCCESS) {
+      if(googleApiAvailability.isUserResolvableError(status)) {
+        googleApiAvailability.getErrorDialog(activity, status, 2404).show();
+      }
+      return false;
+    }
+    return true;
   }
 
   private void displayChat() {
@@ -148,7 +171,7 @@ public class FirebaseActivity extends MvpAppCompatActivity implements IFirebaseA
       {
         showToast("Вход выполнен");
         displayChat();
-      } else {
+      } else if (resultCode == RESULT_CANCELED){
         showToast("Вход не выполнен");
         finish();
       }
@@ -163,8 +186,7 @@ public class FirebaseActivity extends MvpAppCompatActivity implements IFirebaseA
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == R.id.menu_signout)
-    {
+    if (item.getItemId() == R.id.menu_signout) {
       AuthUI.getInstance().signOut(this)
           .addOnCompleteListener(task -> {
             showToast("Выход выполнен");
